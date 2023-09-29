@@ -23,8 +23,8 @@ def get_driver():
     option.add_argument('disable-infobars')
     option.add_argument('start-maximized')
     option.add_argument('--disable-dev-shm-using')
-    option.add_extension('uBlock-Origin.crx')
-    option.add_extension('istilldontcareaboutcookies-1.1.1.crx')
+    option.add_extension('resources/uBlock-Origin.crx')
+    option.add_extension('resources/istilldontcareaboutcookies-1.1.1.crx')
     driver = webdriver.Chrome(options=option)
     try:
         yield driver
@@ -48,8 +48,8 @@ def main():
     global terminate
     signal.signal(signal.SIGINT, stop)
     with get_driver() as driver:
-        terminate.wait()
-        driver.close()
+        driver.get('https://google.com')
+        breakpoint()
 
 if __name__ == '__main__':
     terminate = threading.Event()
